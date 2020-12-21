@@ -1,0 +1,5 @@
+language="nodejs"
+run="sh run.sh && npm start"
+
+[packager]
+ignoredPaths=["src", "dist", "http"]
