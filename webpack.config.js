@@ -32,7 +32,7 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const PreactRefreshWebpackPlugin = require('@prefresh/webpack')
 const { DefinePlugin, optimize: { LimitChunkCountPlugin } } = require('webpack')
 const SRC = join(__dirname, 'src')
 
@@ -79,7 +79,7 @@ const baseConfig = {
                 '@babel/plugin-syntax-dynamic-import',
                 '@babel/plugin-proposal-object-rest-spread',
                 '@babel/plugin-proposal-class-properties',
-                isDev ? require.resolve('react-refresh/babel') : null
+                isDev ? '@prefresh/babel-plugin' : null
               ].filter(Boolean)
             }
           }
@@ -204,7 +204,7 @@ const baseConfig = {
 }
 
 if (isDev) {
-  baseConfig.plugins.push(new FriendlyErrorsWebpackPlugin(), new ReactRefreshWebpackPlugin())
+  baseConfig.plugins.push(new FriendlyErrorsWebpackPlugin(), new PreactRefreshWebpackPlugin())
   module.exports = baseConfig
 } else {
   baseConfig.plugins.push({
